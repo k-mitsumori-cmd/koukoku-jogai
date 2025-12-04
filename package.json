@@ -1,0 +1,13 @@
+{
+  "name": "prtimes-rakuraku",
+  "version": "1.0.0",
+  "description": "AIでプレスリリース記事を一瞬で作成するツール",
+  "type": "module",
+  "dependencies": {
+    "openai": "^4.20.0"
+  },
+  "engines": {
+    "node": ">=18.x"
+  }
+}
+

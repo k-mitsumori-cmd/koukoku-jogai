@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>広告除外依頼文章生成ツール - AIで依頼文を自動作成</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">AD</div>
+                </div>
+                <div class="header-text">
+                    <h1>広告除外依頼 文章生成ツール</h1>
+                    <p>AIで依頼文章を一瞬で作成</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="main">
+        <div class="container">
+            <!-- 入力フォーム -->
+            <div id="form-section" class="card">
+                <div class="form-header">
+                    <h2>依頼情報を入力</h2>
+                    <button id="try-sample-btn" class="btn-secondary" type="button">🎯 お試しボタン</button>
+                </div>
+
+                <form id="request-form" class="article-form">
+                    <div class="form-group">
+                        <label for="your-company">
+                            あなたの会社名 <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="your-company" 
+                            name="your-company" 
+                            placeholder="例: 株式会社Matchbox Technologies"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="your-name">
+                            あなたの名前 <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="your-name" 
+                            name="your-name" 
+                            placeholder="例: 三森"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="your-email">
+                            あなたのメールアドレス <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="email" 
+                            id="your-email" 
+                            name="your-email" 
+                            placeholder="例: k-mitsumori@matchbox.jp"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="target-company">
+                            対象企業名（広告を出している企業） <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="target-company" 
+                            name="target-company" 
+                            placeholder="例: 株式会社○○"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exclusion-keywords">
+                            除外したいキーワード <span class="required">*</span>
+                        </label>
+                        <textarea 
+                            id="exclusion-keywords" 
+                            name="exclusion-keywords" 
+                            rows="6"
+                            placeholder="1行に1つずつキーワードを入力してください。&#10;&#10;例:&#10;マッチボックス&#10;matchbox&#10;Matchbox&#10;マッチボックス　求人&#10;マッチボックス　スポットワーク"
+                            required
+                        ></textarea>
+                        <p class="form-hint">
+                            複数のキーワードを1行ずつ入力してください
+                        </p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tone">
+                            文章のトーン
+                        </label>
+                        <select id="tone" name="tone">
+                            <option value="polite">丁寧（標準）</option>
+                            <option value="very-polite">非常に丁寧</option>
+                            <option value="business">ビジネス風</option>
+                            <option value="friendly">フレンドリー</option>
+                        </select>
+                        <p class="form-hint">文章の印象を調整できます</p>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="generate-btn">
+                        ✨ 依頼文章を生成する
+                    </button>
+                </form>
+
+                <div id="loading" class="loading" style="display: none;">
+                    <div class="progress-container">
+                        <svg class="progress-ring" width="120" height="120">
+                            <circle class="progress-ring-circle-bg" cx="60" cy="60" r="54" fill="transparent" stroke="#e0e0e0" stroke-width="8"/>
+                            <circle class="progress-ring-circle" cx="60" cy="60" r="54" fill="transparent" stroke="#1e3a8a" stroke-width="8" stroke-linecap="round"/>
+                        </svg>
+                        <div class="progress-text">
+                            <span class="progress-percent">0</span>%
+                        </div>
+                    </div>
+                    <p class="loading-message">依頼文章を生成中...</p>
+                </div>
+            </div>
+
+            <!-- 依頼文章プレビュー -->
+            <div id="preview-section" class="card" style="display: none; position: relative;">
+                <div id="preview-loading" class="preview-loading">
+                    <div class="progress-container">
+                        <svg class="progress-ring" width="120" height="120">
+                            <circle class="progress-ring-circle-bg" cx="60" cy="60" r="54" fill="transparent" stroke="#e0e0e0" stroke-width="8"/>
+                            <circle class="progress-ring-circle" cx="60" cy="60" r="54" fill="transparent" stroke="#1e3a8a" stroke-width="8" stroke-linecap="round"/>
+                        </svg>
+                        <div class="progress-text">
+                            <span class="progress-percent">0</span>%
+                        </div>
+                    </div>
+                    <p class="loading-message">現在再生成しています...</p>
+                </div>
+                <div class="preview-header">
+                    <h2>生成された依頼文章</h2>
+                    <div class="preview-actions">
+                        <button id="regenerate-btn" class="btn-secondary">🔄 再生成</button>
+                        <button id="copy-btn" class="btn-secondary">📋 コピー</button>
+                        <button id="reset-btn" class="btn-secondary">🔄 新規作成</button>
+                    </div>
+                </div>
+
+                <div class="article-preview">
+                    <div id="preview-body" class="article-body"></div>
+                </div>
+
+                <div class="info-box">
+                    <p>💡 <strong>次のステップ:</strong> 生成された依頼文章をコピーして、対象企業のフォームまたはメールに貼り付けて送信してください。必要に応じて、内容を調整してから送信してください。「再生成」ボタンで、異なるニュアンスの文章を生成することもできます。</p>
+                </div>
+            </div>
+
+            <!-- 使い方ガイド -->
+            <div id="guide-section" class="card guide-card">
+                <h3>📖 使い方</h3>
+                <ol class="guide-list">
+                    <li>「お試しボタン」をクリックして、サンプルデータで動作を確認できます</li>
+                    <li>あなたの会社名、名前、メールアドレス、対象企業名、除外したいキーワードを入力してください</li>
+                    <li>「依頼文章を生成する」ボタンをクリックすると、AIが適切な依頼文章を作成します</li>
+                    <li>生成された文章をコピーして、対象企業に送信してください</li>
+                    <li>「再生成」ボタンで、異なるニュアンスの文章を生成できます</li>
+                </ol>
+            </div>
+        </div>
+    </main>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <p>広告除外依頼 文章生成ツール - AIで依頼文章を簡単作成</p>
+        </div>
+    </footer>
+
+    <script src="ad-exclusion-app.js"></script>
+</body>
+</html>
+

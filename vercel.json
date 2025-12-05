@@ -3,6 +3,10 @@
     {
       "source": "/api/generate",
       "destination": "/api/generate"
+    },
+    {
+      "source": "/api/generate-exclusion",
+      "destination": "/api/generate-exclusion"
     }
   ]
 }

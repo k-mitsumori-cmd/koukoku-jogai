@@ -1,11 +1,82 @@
-// サンプルデータ（軽い入力）
-const SAMPLE_DATA = {
-    title: '新サービス「プレスリリース ラクラク」をリリース',
-    purpose: 'tool-announcement',
-    companyName: '株式会社サンプル',
-    companyUrl: 'https://example.com',
-    content: `AIを活用したプレスリリース作成ツールをリリースしました。タイトルと簡単な内容を入力するだけで、高品質なプレスリリースが自動生成されます。PR担当者の作業時間を大幅に短縮できます。`
-};
+// サンプルデータ（複数パターン）
+const SAMPLE_DATA_ARRAY = [
+    {
+        title: '新サービス「プレスリリース ラクラク」をリリース',
+        purpose: 'tool-announcement',
+        companyName: '株式会社サンプル',
+        companyUrl: 'https://example.com',
+        content: `AIを活用したプレスリリース作成ツールをリリースしました。タイトルと簡単な内容を入力するだけで、高品質なプレスリリースが自動生成されます。PR担当者の作業時間を大幅に短縮できます。`
+    },
+    {
+        title: '新規事業「AIマーケティング支援サービス」を開始',
+        purpose: 'company-announcement',
+        companyName: '株式会社テックイノベーション',
+        companyUrl: 'https://tech-innovation.co.jp',
+        content: `中小企業向けのAIマーケティング支援サービスを新規事業として開始しました。人工知能を活用して、マーケティング戦略の立案から実行までをサポートします。`
+    },
+    {
+        title: 'オンラインセミナー「デジタルマーケティング最新トレンド」を開催',
+        purpose: 'event-announcement',
+        companyName: 'マーケティングアカデミー',
+        companyUrl: 'https://marketing-academy.jp',
+        content: `デジタルマーケティングの最新トレンドを解説する無料オンラインセミナーを開催します。実践的なノウハウを学べる内容となっており、初心者から上級者まで幅広く参加できます。`
+    },
+    {
+        title: '新製品「スマートホームデバイス」を発売',
+        purpose: 'product-launch',
+        companyName: '株式会社ホームテック',
+        companyUrl: 'https://hometech.jp',
+        content: `音声認識とAIを搭載したスマートホームデバイスを発売しました。家電の操作から情報検索まで、自然な会話で操作できます。生活の利便性を大幅に向上させます。`
+    },
+    {
+        title: 'ECサイト「ショッピングモール」の新機能リリース',
+        purpose: 'conversion',
+        companyName: '株式会社ECプラットフォーム',
+        companyUrl: 'https://ec-platform.com',
+        content: `ECサイトにAIレコメンド機能とワンクリック決済機能を追加しました。ユーザーの購買体験を向上させ、コンバージョン率の向上を目指します。`
+    },
+    {
+        title: '大手企業とAI開発でパートナーシップ締結',
+        purpose: 'partnership',
+        companyName: '株式会社AIソリューション',
+        companyUrl: 'https://ai-solution.co.jp',
+        content: `大手IT企業とAI技術の共同開発に関するパートナーシップを締結しました。両社の技術力を結集し、革新的なAIソリューションの開発を進めます。`
+    },
+    {
+        title: 'クラウド会計ソフト「会計クラウド」の新バージョンリリース',
+        purpose: 'tool-announcement',
+        companyName: '株式会社会計システム',
+        companyUrl: 'https://kaikei-system.jp',
+        content: `クラウド会計ソフトの新バージョンをリリースしました。自動仕訳機能の精度向上と、モバイルアプリの操作性改善を実現しました。`
+    },
+    {
+        title: '新規事業部を設立し、DX支援サービスを開始',
+        purpose: 'company-announcement',
+        companyName: '株式会社ビジネスコンサル',
+        companyUrl: 'https://business-consult.co.jp',
+        content: `デジタルトランスフォーメーション支援を専門とする新規事業部を設立しました。企業のDX推進を包括的にサポートするサービスを提供します。`
+    },
+    {
+        title: '無料ウェビナー「スタートアップの資金調達戦略」を開催',
+        purpose: 'event-announcement',
+        companyName: 'スタートアップ支援機構',
+        companyUrl: 'https://startup-support.org',
+        content: `スタートアップ企業向けに資金調達戦略を解説する無料ウェビナーを開催します。ベンチャーキャピタルの専門家が実践的なアドバイスを提供します。`
+    },
+    {
+        title: '新商品「オーガニックコスメ」シリーズを発売',
+        purpose: 'product-launch',
+        companyName: '株式会社ナチュラルビューティー',
+        companyUrl: 'https://natural-beauty.jp',
+        content: `100%オーガニック原料を使用したコスメシリーズを発売しました。肌に優しく、環境にも配慮した製品です。敏感肌の方にもおすすめです。`
+    }
+];
+
+// ランダムにサンプルデータを取得する関数
+function getRandomSampleData() {
+    const randomIndex = Math.floor(Math.random() * SAMPLE_DATA_ARRAY.length);
+    return SAMPLE_DATA_ARRAY[randomIndex];
+}
 
 // 目的の説明
 const PURPOSE_DESCRIPTIONS = {
@@ -69,13 +140,16 @@ purposeHint.textContent = PURPOSE_DESCRIPTIONS[purposeSelect.value];
 
 // お試しボタン
 trySampleBtn.addEventListener('click', () => {
-    titleInput.value = SAMPLE_DATA.title;
-    purposeSelect.value = SAMPLE_DATA.purpose;
-    companyNameInput.value = SAMPLE_DATA.companyName;
-    companyUrlInput.value = SAMPLE_DATA.companyUrl || '';
-    contentTextarea.value = SAMPLE_DATA.content;
-    contentLength.textContent = SAMPLE_DATA.content.length;
-    purposeHint.textContent = PURPOSE_DESCRIPTIONS[SAMPLE_DATA.purpose];
+    // ランダムにサンプルデータを取得
+    const sampleData = getRandomSampleData();
+    
+    titleInput.value = sampleData.title;
+    purposeSelect.value = sampleData.purpose;
+    companyNameInput.value = sampleData.companyName;
+    companyUrlInput.value = sampleData.companyUrl || '';
+    contentTextarea.value = sampleData.content;
+    contentLength.textContent = sampleData.content.length;
+    purposeHint.textContent = PURPOSE_DESCRIPTIONS[sampleData.purpose];
     
     // フォームの先頭にスクロール
     titleInput.scrollIntoView({ behavior: 'smooth', block: 'center' });

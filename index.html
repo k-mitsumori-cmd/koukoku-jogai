@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>プレスリリース ラクラク - AIでリリース記事を一瞬で作成</title>
+    <title>広告除外依頼文章生成ツール - AIで依頼文を自動作成</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -12,11 +12,11 @@
         <div class="container">
             <div class="header-content">
                 <div class="logo">
-                    <div class="logo-icon">PR</div>
+                    <div class="logo-icon">AD</div>
                 </div>
                 <div class="header-text">
-                    <h1>プレスリリース ラクラク</h1>
-                    <p>AIでリリース記事を一瞬で作成</p>
+                    <h1>広告除外依頼 文章生成ツール</h1>
+                    <p>AIで依頼文章を一瞬で作成</p>
                 </div>
             </div>
         </div>
@@ -28,83 +28,94 @@
             <!-- 入力フォーム -->
             <div id="form-section" class="card">
                 <div class="form-header">
-                    <h2>記事情報を入力</h2>
+                    <h2>依頼情報を入力</h2>
                     <button id="try-sample-btn" class="btn-secondary" type="button">🎯 お試しボタン</button>
                 </div>
 
-                <form id="article-form" class="article-form">
+                <form id="request-form" class="article-form">
                     <div class="form-group">
-                        <label for="title">
-                            タイトル <span class="required">*</span>
+                        <label for="your-company">
+                            あなたの会社名 <span class="required">*</span>
                         </label>
                         <input 
                             type="text" 
-                            id="title" 
-                            name="title" 
-                            placeholder="例: 新サービス「○○」をリリース"
+                            id="your-company" 
+                            name="your-company" 
+                            placeholder="例: 株式会社Matchbox Technologies"
                             required
                         >
                     </div>
 
                     <div class="form-group">
-                        <label for="purpose">
-                            目的 <span class="required">*</span>
-                        </label>
-                        <select id="purpose" name="purpose" required>
-                            <option value="company-announcement">会社の発表 - 新規事業、組織変更、経営方針などの会社発表</option>
-                            <option value="event-announcement">イベント告知 - セミナー、展示会、ウェビナーなどのイベント告知</option>
-                            <option value="tool-announcement">ツール発表 - 新サービス、アプリ、ソフトウェアのリリース</option>
-                            <option value="conversion">コンバージョン目的 - 商品・サービスの購入・登録を促進する記事</option>
-                            <option value="product-launch">製品リリース - 新製品の発売・リリース告知</option>
-                            <option value="partnership">パートナーシップ - 他社との提携・協業の発表</option>
-                            <option value="other">その他 - 上記以外の目的</option>
-                        </select>
-                        <p class="form-hint" id="purpose-hint"></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="company-name">
-                            会社名 <span class="required">*</span>
+                        <label for="your-name">
+                            あなたの名前 <span class="required">*</span>
                         </label>
                         <input 
                             type="text" 
-                            id="company-name" 
-                            name="company-name" 
-                            placeholder="例: 株式会社サンプル"
+                            id="your-name" 
+                            name="your-name" 
+                            placeholder="例: 三森"
                             required
                         >
                     </div>
 
                     <div class="form-group">
-                        <label for="company-url">
-                            会社URL
+                        <label for="your-email">
+                            あなたのメールアドレス <span class="required">*</span>
                         </label>
                         <input 
-                            type="url" 
-                            id="company-url" 
-                            name="company-url" 
-                            placeholder="例: https://example.com"
+                            type="email" 
+                            id="your-email" 
+                            name="your-email" 
+                            placeholder="例: k-mitsumori@matchbox.jp"
+                            required
                         >
                     </div>
 
                     <div class="form-group">
-                        <label for="content">
-                            内容 <span class="required">*</span>
+                        <label for="target-company">
+                            対象企業名（広告を出している企業） <span class="required">*</span>
+                        </label>
+                        <input 
+                            type="text" 
+                            id="target-company" 
+                            name="target-company" 
+                            placeholder="例: 株式会社○○"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exclusion-keywords">
+                            除外したいキーワード <span class="required">*</span>
                         </label>
                         <textarea 
-                            id="content" 
-                            name="content" 
-                            rows="8"
-                            placeholder="リリース記事の内容を簡潔に入力してください。詳細はAIが自動で補完します。&#10;&#10;例: 新サービス「○○」をリリースしました。ユーザーの作業効率を向上させるツールです。"
+                            id="exclusion-keywords" 
+                            name="exclusion-keywords" 
+                            rows="6"
+                            placeholder="1行に1つずつキーワードを入力してください。&#10;&#10;例:&#10;マッチボックス&#10;matchbox&#10;Matchbox&#10;マッチボックス　求人&#10;マッチボックス　スポットワーク"
                             required
                         ></textarea>
                         <p class="form-hint">
-                            <span id="content-length">0</span> 文字（簡潔な入力でOK！AIが詳細を補完します）
+                            複数のキーワードを1行ずつ入力してください
                         </p>
                     </div>
 
+                    <div class="form-group">
+                        <label for="tone">
+                            文章のトーン
+                        </label>
+                        <select id="tone" name="tone">
+                            <option value="polite">丁寧（標準）</option>
+                            <option value="very-polite">非常に丁寧</option>
+                            <option value="business">ビジネス風</option>
+                            <option value="friendly">フレンドリー</option>
+                        </select>
+                        <p class="form-hint">文章の印象を調整できます</p>
+                    </div>
+
                     <button type="submit" class="btn-primary" id="generate-btn">
-                        ✨ 記事を生成する
+                        ✨ 依頼文章を生成する
                     </button>
                 </form>
 
@@ -118,11 +129,11 @@
                             <span class="progress-percent">0</span>%
                         </div>
                     </div>
-                    <p class="loading-message">記事を生成中...</p>
+                    <p class="loading-message">依頼文章を生成中...</p>
                 </div>
             </div>
 
-            <!-- 記事プレビュー -->
+            <!-- 依頼文章プレビュー -->
             <div id="preview-section" class="card" style="display: none; position: relative;">
                 <div id="preview-loading" class="preview-loading">
                     <div class="progress-container">
@@ -137,7 +148,7 @@
                     <p class="loading-message">現在再生成しています...</p>
                 </div>
                 <div class="preview-header">
-                    <h2>生成された記事</h2>
+                    <h2>生成された依頼文章</h2>
                     <div class="preview-actions">
                         <button id="regenerate-btn" class="btn-secondary">🔄 再生成</button>
                         <button id="copy-btn" class="btn-secondary">📋 コピー</button>
@@ -146,19 +157,11 @@
                 </div>
 
                 <div class="article-preview">
-                    <div class="article-header">
-                        <h3 id="preview-title"></h3>
-                        <p id="preview-summary" class="article-summary"></p>
-                    </div>
                     <div id="preview-body" class="article-body"></div>
-                    <div id="preview-keywords" class="article-keywords" style="display: none;">
-                        <p class="keywords-label">キーワード:</p>
-                        <div class="keywords-list"></div>
-                    </div>
                 </div>
 
                 <div class="info-box">
-                    <p>💡 <strong>次のステップ:</strong> 生成された記事をコピーして、PR TIMESの投稿画面に貼り付けてください。必要に応じて、内容を調整してから投稿してください。「再生成」ボタンで、異なるニュアンスの記事を生成することもできます。</p>
+                    <p>💡 <strong>次のステップ:</strong> 生成された依頼文章をコピーして、対象企業のフォームまたはメールに貼り付けて送信してください。必要に応じて、内容を調整してから送信してください。「再生成」ボタンで、異なるニュアンスの文章を生成することもできます。</p>
                 </div>
             </div>
 
@@ -167,10 +170,10 @@
                 <h3>📖 使い方</h3>
                 <ol class="guide-list">
                     <li>「お試しボタン」をクリックして、サンプルデータで動作を確認できます</li>
-                    <li>タイトル、目的、会社名、内容を入力してください（内容は簡潔でOK！）</li>
-                    <li>「記事を生成する」ボタンをクリックすると、AIが詳細なプレスリリースを作成します</li>
-                    <li>生成された記事をコピーして、PR TIMESに投稿してください</li>
-                    <li>「再生成」ボタンで、異なるニュアンスの記事を生成できます</li>
+                    <li>あなたの会社名、名前、メールアドレス、対象企業名、除外したいキーワードを入力してください</li>
+                    <li>「依頼文章を生成する」ボタンをクリックすると、AIが適切な依頼文章を作成します</li>
+                    <li>生成された文章をコピーして、対象企業に送信してください</li>
+                    <li>「再生成」ボタンで、異なるニュアンスの文章を生成できます</li>
                 </ol>
             </div>
         </div>
@@ -179,7 +182,7 @@
     <!-- フッター -->
     <footer class="footer">
         <div class="container">
-            <p>プレスリリース ラクラク - AIでリリース記事を簡単作成</p>
+            <p>広告除外依頼 文章生成ツール - AIで依頼文章を簡単作成</p>
         </div>
     </footer>
 

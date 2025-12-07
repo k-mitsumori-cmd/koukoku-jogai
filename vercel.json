@@ -1,10 +1,6 @@
 {
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/ad-exclusion-request.html"
-    },
-    {
       "source": "/api/generate",
       "destination": "/api/generate"
     },

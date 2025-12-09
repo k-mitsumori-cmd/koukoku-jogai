@@ -1,27 +1,27 @@
 // サンプルデータ（複数パターン）
 const SAMPLE_DATA_ARRAY = [
     {
-        yourCompany: '株式会社Matchbox Technologies',
-        yourName: '三森',
-        yourEmail: 'k-mitsumori@matchbox.jp',
-        targetCompany: '株式会社○○',
-        exclusionKeywords: 'マッチボックス\nmatchbox\nMatchbox\nマッチボックス　求人\nマッチボックス　スポットワーク\nマッチボックス　バイト\nマッチボックス　企業',
+        yourCompany: 'サンプル株式会社',
+        yourName: '田中一郎',
+        yourEmail: 't.tanaka@example.com',
+        targetCompany: 'テスト広告株式会社',
+        exclusionKeywords: 'サンプル株式会社\nSample Company\nサンプル株式会社 求人\nサンプル株式会社 サービス\nサンプル株式会社 広告',
         tone: 'polite'
     },
     {
-        yourCompany: '株式会社サンプルテック',
-        yourName: '山田太郎',
-        yourEmail: 'yamada@sample-tech.co.jp',
-        targetCompany: '株式会社広告代理店',
-        exclusionKeywords: 'サンプルテック\nサンプルテック　求人\nサンプルテック　サービス',
+        yourCompany: 'テストソリューションズ株式会社',
+        yourName: '山田花子',
+        yourEmail: 'hanako.yamada@example.com',
+        targetCompany: 'デモ広告代理店株式会社',
+        exclusionKeywords: 'テストソリューションズ\nTest Solutions\nテストソリューションズ 求人',
         tone: 'very-polite'
     },
     {
-        yourCompany: '株式会社イノベーション',
-        yourName: '佐藤花子',
-        yourEmail: 'sato@innovation.jp',
-        targetCompany: '株式会社マーケティング',
-        exclusionKeywords: 'イノベーション\ninnovation\nイノベーション　採用',
+        yourCompany: 'デモマーケティング株式会社',
+        yourName: '佐藤次郎',
+        yourEmail: 'jiro.sato@example.com',
+        targetCompany: 'サンプルマーケティング株式会社',
+        exclusionKeywords: 'デモマーケティング\nDemo Marketing\nデモマーケティング 採用',
         tone: 'business'
     }
 ];
